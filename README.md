@@ -99,7 +99,7 @@
 
 ---
 
-## 📸 Screenshots (Coming Soon)
+## 📸 Screenshots
 - Domain Controller setup  
 - Active Directory Users and Groups  
 - Group Policy configuration  
