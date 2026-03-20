@@ -1,148 +1,143 @@
-# Active Directory Home Lab (Windows Server 2022)
+Active Directory Home Lab
 
-## 📌 Overview
-Built a fully functional Active Directory lab environment using VirtualBox to simulate a real-world enterprise network. This project includes domain services, DNS configuration, Group Policy management, file sharing with permissions, and helpdesk-level delegation.
+Windows Server 2022 | Windows 10 | VirtualBox | DNS | GPO | RSAT
 
----
+Overview
 
-## 🖥️ Lab Environment
+Built a virtualized Active Directory environment to simulate real-world helpdesk and junior system administration tasks. This lab focuses on identity management, access control, Group Policy, and troubleshooting common domain issues.
 
-- Platform: VirtualBox  
-- Domain Controller: Windows Server 2022  
-- Client Machine: Windows 10  
-- Domain: `mylab.local`  
-- Server IP: `192.168.10.10`  
+Environment
 
----
+Hypervisor: VirtualBox
 
-## ⚙️ Key Features & Configurations
+Domain Controller: Windows Server 2022
 
-### 🔹 Active Directory Domain Services (AD DS)
-- Promoted Windows Server 2022 to Domain Controller  
-- Created domain: `mylab.local`  
-- Managed domain users and security groups  
-- Implemented role-based access using groups  
+Client Machine: Windows 10
 
----
+Domain: mylab.local
 
-### 🌐 DNS Configuration
-- Configured static IP addressing  
-- Diagnosed DNS resolution failures  
-- Implemented DNS forwarders (8.8.8.8 / 1.1.1.1)  
-- Resolved IPv6 (::1) misconfiguration issue  
+Core Services: Active Directory Domain Services (AD DS), DNS
 
----
+Admin Tools: ADUC, Group Policy Management, DNS Manager, RSAT
 
-### 💻 Client Machine Integration
-- Deployed Windows 10 VM  
-- Joined client to domain  
-- Verified domain authentication  
-- Troubleshot domain join and login issues  
+Key Implementations
 
----
+Promoted Windows Server 2022 to a Domain Controller
 
-### 🔐 Group Policy (GPO)
-- Created custom GPO: **Workstation Lockdown Policy**  
-- Restricted Control Panel and system settings  
-- Applied security filtering to target specific users  
-- Used `gpupdate /force` to apply policies  
+Created and configured the mylab.local domain
 
----
+Configured DNS with forwarders for external resolution
 
-### 📁 File Server & Permissions
-- Created shared folder with NTFS and Share permissions  
-- Implemented group-based access control (`FileShare_RW`)  
-- Disabled inheritance to secure resources  
-- Resolved permission conflicts  
+Joined a Windows 10 client to the domain
 
----
+Created users and security groups
 
-### 👨‍💼 Delegation (Helpdesk Simulation)
-- Delegated password reset permissions to `jhelpdesk`  
-- Installed RSAT tools on client machine  
-- Managed users remotely using `dsa.msc`  
-- Simulated real helpdesk workflows  
+Implemented group-based access control for shared folders
 
----
+Configured NTFS + share permissions
 
-### 🌐 Networking
-- Configured dual network adapters (Internal + NAT)  
-- Enabled internet access while maintaining domain connectivity  
-- Diagnosed network vs DNS issues  
+Created and applied a Workstation Lockdown GPO
 
----
+Installed RSAT for remote administration
 
-## 🛠️ Troubleshooting & Issues Resolved
+Delegated password reset permissions to a helpdesk user (jhelpdesk)
 
-### ❌ DNS Resolution Failure
-- Issue: `nslookup` timeouts  
-- Fix: Configured DNS forwarders and corrected DC DNS settings  
+Troubleshooting Experience
 
----
+Resolved multiple real-world issues encountered during setup:
 
-### ❌ No Internet Access in Lab
-- Issue: RSAT installation failed (`0x8024402c`)  
-- Fix: Added NAT adapter for outbound connectivity  
+DNS Resolution Failure
 
----
+Impact: Domain join/login instability
 
-### ❌ Permission Issues
-- Issue: Unauthorized access to shared folder  
-- Fix: Disabled inheritance and used group-based permissions  
+Fix: Corrected DNS configuration and forwarders
 
----
+Virtual Network Misconfiguration (NAT)
 
-### ❌ Group Membership Not Applying
-- Issue: Access denied despite correct group membership  
-- Fix: Log out/in to refresh authentication token  
+Impact: Client unable to communicate with Domain Controller
 
----
+Fix: Adjusted network adapter settings and IP configuration
 
-### ❌ GPO Over-Restriction
-- Issue: Helpdesk user unable to access Settings  
-- Fix: Adjusted GPO security filtering  
+Permissions & Access Issues
 
----
+Impact: Users unable to access shared folders
 
-### ❌ RSAT Installation Failure
-- Issue: Feature not installing  
-- Fix: Resolved DNS + network configuration  
+Fix: Corrected NTFS vs Share permission alignment and inheritance
 
----
+Group Membership Not Applying
 
-## 🚀 Skills Demonstrated
+Impact: Access changes not taking effect
 
-- Active Directory Administration  
-- DNS Configuration & Troubleshooting  
-- Group Policy Management  
-- Windows Server Administration  
-- Network Troubleshooting  
-- Access Control & Permissions (NTFS + Share)  
-- Helpdesk Operations Simulation  
-- Virtualization (VirtualBox)  
+Fix: Forced group policy refresh and token update
 
----
+Delegation Validation
 
-## 🔧 Future Improvements
+Impact: Helpdesk user initially unable to reset passwords
 
-- Implement Organizational Units (OUs)  
-- Add second client machine for multi-user simulation  
-- Configure drive mapping via GPO  
-- Implement audit policies (logon tracking)  
-- Add DHCP server role  
-- Simulate multi-domain or multi-DC environment  
+Fix: Correctly applied delegated permissions in ADUC
 
----
+Skills Demonstrated
 
-## 📸 Screenshots (Coming Soon)
-- Domain Controller setup  
-- Active Directory Users and Groups  
-- Group Policy configuration  
-- Shared folder permissions  
-- Client domain login  
+Active Directory Administration
 
----
+DNS Configuration & Troubleshooting
 
-## 💡 Key Takeaway
+Windows Domain Environments
 
-This project goes beyond basic setup by simulating real-world IT scenarios, including troubleshooting DNS failures, permission conflicts, and network configuration issues commonly encountered in enterprise environments.
+Group Policy Management (GPO)
+
+NTFS & Share Permissions
+
+Role-Based Access Control (RBAC)
+
+RSAT / Remote Administration
+
+Windows Troubleshooting Methodology
+
+Screenshots
+
+Domain Controller Setup
+
+AD Users and Computers
+
+Domain-Joined Client
+
+Group Policy Configuration
+
+Shared Folder Permissions
+
+Helpdesk Delegation
+
+Key Takeaways
+
+DNS is critical to Active Directory functionality and authentication
+
+Group-based permissions are more scalable than user-based access
+
+Proper delegation reduces reliance on Domain Admin accounts
+
+Troubleshooting is as important as initial configuration
+
+Next Steps
+
+Implement Organizational Units (OUs) with department-based policies
+
+Automate user provisioning with PowerShell
+
+Deploy login scripts and drive mappings
+
+Enable auditing and monitor security logs
+
+Simulate helpdesk ticket scenarios
+
+Repository Structure
+active-directory-homelab/
+├── README.md
+├── screenshots/
+├── diagrams/
+├── docs/
+├── scripts/
+└── notes/
+Why This Project Matters
+
+This lab replicates core tasks performed in entry-level IT roles, including helpdesk support and junior system administration. It demonstrates hands-on experience with user management, access control, policy enforcement, and troubleshooting in a Windows domain environment.
