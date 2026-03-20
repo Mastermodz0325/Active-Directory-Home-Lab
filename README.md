@@ -1,110 +1,51 @@
-### 💻 Client Machine Integration
-- Deployed Windows 10 VM  
-- Joined client to domain  
-- Verified domain authentication  
-- Troubleshot domain join and login issues  
+# Active Directory Home Lab
+Windows Server 2022 | Windows 10 | VirtualBox | DNS | GPO | RSAT
 
 ---
 
-### 🔐 Group Policy (GPO)
-- Created custom GPO: **Workstation Lockdown Policy**  
-- Restricted Control Panel and system settings  
-- Applied security filtering to target specific users  
-- Used `gpupdate /force` to apply policies  
+## Contents
+- Overview
+- Environment
+- Key Implementations
+- Screenshots
+- Walkthrough Summary
+- Troubleshooting Experience
+- Skills Demonstrated
+- Next Steps
+- Additional Documentation
 
 ---
 
-### 📁 File Server & Permissions
-- Created shared folder with NTFS and Share permissions  
-- Implemented group-based access control (`FileShare_RW`)  
-- Disabled inheritance to secure resources  
-- Resolved permission conflicts  
+## Overview
+Built a virtualized Active Directory environment to simulate real-world helpdesk and junior system administration tasks. This lab focuses on identity management, access control, Group Policy, and troubleshooting common domain issues.
 
 ---
 
-### 👨‍💼 Delegation (Helpdesk Simulation)
-- Delegated password reset permissions to `jhelpdesk`  
-- Installed RSAT tools on client machine  
-- Managed users remotely using `dsa.msc`  
-- Simulated real helpdesk workflows  
+## Environment
+
+- Hypervisor: VirtualBox  
+- Domain Controller: Windows Server 2022  
+- Client Machine: Windows 10  
+- Domain: mylab.local  
+- Core Services: Active Directory Domain Services (AD DS), DNS  
+- Admin Tools: ADUC, Group Policy Management, DNS Manager, RSAT  
 
 ---
 
-### 🌐 Networking
-- Configured dual network adapters (Internal + NAT)  
-- Enabled internet access while maintaining domain connectivity  
-- Diagnosed network vs DNS issues  
+## Key Implementations
+
+- Promoted Windows Server 2022 to a Domain Controller  
+- Created and configured the mylab.local domain  
+- Configured DNS with forwarders  
+- Joined a Windows 10 client to the domain  
+- Created users and security groups  
+- Implemented group-based access control (RBAC)  
+- Configured NTFS and share permissions  
+- Created and applied a Workstation Lockdown GPO  
+- Installed RSAT for remote administration  
+- Delegated password reset permissions to helpdesk user (jhelpdesk)  
 
 ---
-
-## 🛠️ Troubleshooting & Issues Resolved
-
-### ❌ DNS Resolution Failure
-- Issue: `nslookup` timeouts  
-- Fix: Configured DNS forwarders and corrected DC DNS settings  
-
----
-
-### ❌ No Internet Access in Lab
-- Issue: RSAT installation failed (`0x8024402c`)  
-- Fix: Added NAT adapter for outbound connectivity  
-
----
-
-### ❌ Permission Issues
-- Issue: Unauthorized access to shared folder  
-- Fix: Disabled inheritance and used group-based permissions  
-
----
-
-### ❌ Group Membership Not Applying
-- Issue: Access denied despite correct group membership  
-- Fix: Log out/in to refresh authentication token  
-
----
-
-### ❌ GPO Over-Restriction
-- Issue: Helpdesk user unable to access Settings  
-- Fix: Adjusted GPO security filtering  
-
----
-
-### ❌ RSAT Installation Failure
-- Issue: Feature not installing  
-- Fix: Resolved DNS + network configuration  
-
----
-
-## 🚀 Skills Demonstrated
-
-- Active Directory Administration  
-- DNS Configuration & Troubleshooting  
-- Group Policy Management  
-- Windows Server Administration  
-- Network Troubleshooting  
-- Access Control & Permissions (NTFS + Share)  
-- Helpdesk Operations Simulation  
-- Virtualization (VirtualBox)  
-
----
-
-## 🔧 Future Improvements
-
-- Implement Organizational Units (OUs)  
-- Add second client machine for multi-user simulation  
-- Configure drive mapping via GPO  
-- Implement audit policies (logon tracking)  
-- Add DHCP server role  
-- Simulate multi-domain or multi-DC environment  
-
----
-
-## 📸 Screenshots
-- Domain Controller setup  
-- Active Directory Users and Groups  
-- Group Policy configuration  
-- Shared folder permissions  
-- Client domain login  
 
 ## Screenshots
 
@@ -116,7 +57,7 @@
 
 ---
 
-### Active Directory Users & Groups
+### Active Directory Users and Groups
 <p align="center">
   <img src="images/Users.PNG" width="600">
 </p>
@@ -133,7 +74,7 @@
 <p align="center">
   <img src="images/Helpdesk Client Login.jpg" width="600">
 </p>
-<p align="center"><em>Helpdesk user logging into domain-joined workstation</em></p>
+<p align="center"><em>Helpdesk user login on domain-joined workstation</em></p>
 
 ---
 
@@ -162,9 +103,59 @@
 <p align="center">
   <img src="images/Workstation Lockdown Policy.png" width="600">
 </p>
-<p align="center"><em>Workstation lockdown enforced via Group Policy</em></p>
+<p align="center"><em>Workstation restrictions enforced using Group Policy</em></p>
+
 ---
 
-## 💡 Key Takeaway
+## Walkthrough Summary
 
-This project goes beyond basic setup by simulating real-world IT scenarios, including troubleshooting DNS failures, permission conflicts, and network configuration issues commonly encountered in enterprise environments.
+1. Deployed Windows Server 2022 and promoted it to a Domain Controller  
+2. Configured DNS and validated name resolution  
+3. Joined Windows 10 client to the domain  
+4. Created users and security groups  
+5. Implemented group-based file share access  
+6. Applied Group Policy for workstation control  
+7. Delegated password reset permissions to helpdesk user  
+8. Troubleshot DNS, permissions, and network issues  
+
+---
+
+## Troubleshooting Experience
+
+- DNS misconfiguration affecting domain join and authentication  
+- VirtualBox networking issues preventing communication  
+- NTFS and share permission conflicts  
+- Group membership delays due to token refresh  
+- Delegation misconfiguration for helpdesk permissions  
+
+Full breakdown available here:  
+docs/troubleshooting-log.md
+
+---
+
+## Skills Demonstrated
+
+- Active Directory Administration  
+- DNS Configuration and Troubleshooting  
+- Group Policy Management (GPO)  
+- Windows Domain Environments  
+- NTFS and Share Permissions  
+- Role-Based Access Control (RBAC)  
+- RSAT and Remote Administration  
+- IT Troubleshooting Methodology  
+
+---
+
+## Next Steps
+
+- Implement Organizational Units (OUs) for departments  
+- Apply multiple GPOs based on roles  
+- Automate user creation with PowerShell  
+- Deploy login scripts and mapped drives  
+- Enable auditing and monitor event logs  
+
+---
+
+## Additional Documentation
+
+- docs/troubleshooting-log.md
