@@ -1,143 +1,113 @@
-Active Directory Home Lab
+### 💻 Client Machine Integration
+- Deployed Windows 10 VM  
+- Joined client to domain  
+- Verified domain authentication  
+- Troubleshot domain join and login issues  
 
-Windows Server 2022 | Windows 10 | VirtualBox | DNS | GPO | RSAT
+---
 
-Overview
+### 🔐 Group Policy (GPO)
+- Created custom GPO: **Workstation Lockdown Policy**  
+- Restricted Control Panel and system settings  
+- Applied security filtering to target specific users  
+- Used `gpupdate /force` to apply policies  
 
-Built a virtualized Active Directory environment to simulate real-world helpdesk and junior system administration tasks. This lab focuses on identity management, access control, Group Policy, and troubleshooting common domain issues.
+---
 
-Environment
+### 📁 File Server & Permissions
+- Created shared folder with NTFS and Share permissions  
+- Implemented group-based access control (`FileShare_RW`)  
+- Disabled inheritance to secure resources  
+- Resolved permission conflicts  
 
-Hypervisor: VirtualBox
+---
 
-Domain Controller: Windows Server 2022
+### 👨‍💼 Delegation (Helpdesk Simulation)
+- Delegated password reset permissions to `jhelpdesk`  
+- Installed RSAT tools on client machine  
+- Managed users remotely using `dsa.msc`  
+- Simulated real helpdesk workflows  
 
-Client Machine: Windows 10
+---
 
-Domain: mylab.local
+### 🌐 Networking
+- Configured dual network adapters (Internal + NAT)  
+- Enabled internet access while maintaining domain connectivity  
+- Diagnosed network vs DNS issues  
 
-Core Services: Active Directory Domain Services (AD DS), DNS
+---
 
-Admin Tools: ADUC, Group Policy Management, DNS Manager, RSAT
+## 🛠️ Troubleshooting & Issues Resolved
 
-Key Implementations
+### ❌ DNS Resolution Failure
+- Issue: `nslookup` timeouts  
+- Fix: Configured DNS forwarders and corrected DC DNS settings  
 
-Promoted Windows Server 2022 to a Domain Controller
+---
 
-Created and configured the mylab.local domain
+### ❌ No Internet Access in Lab
+- Issue: RSAT installation failed (`0x8024402c`)  
+- Fix: Added NAT adapter for outbound connectivity  
 
-Configured DNS with forwarders for external resolution
+---
 
-Joined a Windows 10 client to the domain
+### ❌ Permission Issues
+- Issue: Unauthorized access to shared folder  
+- Fix: Disabled inheritance and used group-based permissions  
 
-Created users and security groups
+---
 
-Implemented group-based access control for shared folders
+### ❌ Group Membership Not Applying
+- Issue: Access denied despite correct group membership  
+- Fix: Log out/in to refresh authentication token  
 
-Configured NTFS + share permissions
+---
 
-Created and applied a Workstation Lockdown GPO
+### ❌ GPO Over-Restriction
+- Issue: Helpdesk user unable to access Settings  
+- Fix: Adjusted GPO security filtering  
 
-Installed RSAT for remote administration
+---
 
-Delegated password reset permissions to a helpdesk user (jhelpdesk)
+### ❌ RSAT Installation Failure
+- Issue: Feature not installing  
+- Fix: Resolved DNS + network configuration  
 
-Troubleshooting Experience
+---
 
-Resolved multiple real-world issues encountered during setup:
+## 🚀 Skills Demonstrated
 
-DNS Resolution Failure
+- Active Directory Administration  
+- DNS Configuration & Troubleshooting  
+- Group Policy Management  
+- Windows Server Administration  
+- Network Troubleshooting  
+- Access Control & Permissions (NTFS + Share)  
+- Helpdesk Operations Simulation  
+- Virtualization (VirtualBox)  
 
-Impact: Domain join/login instability
+---
 
-Fix: Corrected DNS configuration and forwarders
+## 🔧 Future Improvements
 
-Virtual Network Misconfiguration (NAT)
+- Implement Organizational Units (OUs)  
+- Add second client machine for multi-user simulation  
+- Configure drive mapping via GPO  
+- Implement audit policies (logon tracking)  
+- Add DHCP server role  
+- Simulate multi-domain or multi-DC environment  
 
-Impact: Client unable to communicate with Domain Controller
+---
 
-Fix: Adjusted network adapter settings and IP configuration
+## 📸 Screenshots (Coming Soon)
+- Domain Controller setup  
+- Active Directory Users and Groups  
+- Group Policy configuration  
+- Shared folder permissions  
+- Client domain login  
 
-Permissions & Access Issues
+---
 
-Impact: Users unable to access shared folders
+## 💡 Key Takeaway
 
-Fix: Corrected NTFS vs Share permission alignment and inheritance
-
-Group Membership Not Applying
-
-Impact: Access changes not taking effect
-
-Fix: Forced group policy refresh and token update
-
-Delegation Validation
-
-Impact: Helpdesk user initially unable to reset passwords
-
-Fix: Correctly applied delegated permissions in ADUC
-
-Skills Demonstrated
-
-Active Directory Administration
-
-DNS Configuration & Troubleshooting
-
-Windows Domain Environments
-
-Group Policy Management (GPO)
-
-NTFS & Share Permissions
-
-Role-Based Access Control (RBAC)
-
-RSAT / Remote Administration
-
-Windows Troubleshooting Methodology
-
-Screenshots
-
-Domain Controller Setup
-
-AD Users and Computers
-
-Domain-Joined Client
-
-Group Policy Configuration
-
-Shared Folder Permissions
-
-Helpdesk Delegation
-
-Key Takeaways
-
-DNS is critical to Active Directory functionality and authentication
-
-Group-based permissions are more scalable than user-based access
-
-Proper delegation reduces reliance on Domain Admin accounts
-
-Troubleshooting is as important as initial configuration
-
-Next Steps
-
-Implement Organizational Units (OUs) with department-based policies
-
-Automate user provisioning with PowerShell
-
-Deploy login scripts and drive mappings
-
-Enable auditing and monitor security logs
-
-Simulate helpdesk ticket scenarios
-
-Repository Structure
-active-directory-homelab/
-├── README.md
-├── screenshots/
-├── diagrams/
-├── docs/
-├── scripts/
-└── notes/
-Why This Project Matters
-
-This lab replicates core tasks performed in entry-level IT roles, including helpdesk support and junior system administration. It demonstrates hands-on experience with user management, access control, policy enforcement, and troubleshooting in a Windows domain environment.
+This project goes beyond basic setup by simulating real-world IT scenarios, including troubleshooting DNS failures, permission conflicts, and network configuration issues commonly encountered in enterprise environments.
